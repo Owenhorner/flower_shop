@@ -1,0 +1,16 @@
+<!-- order form containing a textarea that submits to create -->
+<form action="/create" method="post">
+  <textarea name="order_lines"></textarea>
+  <input type="submit" value="Order">
+
+<% if processed_order.any? %>
+  <h2>Order Summary</h2>
+  <p>
+    <% processed_order.each do |orders| %>
+      <%= "#{orders[:quantity]} #{orders[:code]} #{orders[:total_cost]}" %><br />
+      <% orders[:bundles].each do |bundle, count| %>
+        &nbsp;&nbsp;&nbsp;&nbsp;<%= bundle.to_s(count) %><br />
+      <% end %>
+    <% end %>
+  </p>
+<% end %>
